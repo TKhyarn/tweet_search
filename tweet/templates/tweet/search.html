@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block title %} Recap_tweet {% endblock%}
+{% block body %}
+{% load static %}
+<form action='{% url "search_tweet" %}' method="post">
+    {% csrf_token %}
+    {{ formSearch.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+{% if send %}
+    {{ sFormValid }} </br>
+    <table>
+    List of tweet found:
+    <tr>
+        <td>Auteur</td>
+        <td>Text</td>
+        <td>Sentiment</td>
+    </tr>
+    {% for key in l_tweet %}
+    <tr>
+        <td>{{key.author}}</td>
+        <td>{{key.text}} </td>
+        <td>{{key.sentiment}} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

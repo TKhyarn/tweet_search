@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block title %} Recap_tweet {% endblock%}
+{% block body %}
+{% load static %}
+<img src="{% static 'tweet/images/twitter_logo.png' %}" alt="Mon image" width="40" height="40" />
+<form action='{% url "home" %}' method="post">
+ {% csrf_token %}
+    <span>
+    {{ hashtag.as_p }}
+ <input type="submit" value="Submit" />
+    </span>
+</form>
+<table>
+    THIS IS THE LIST
+    <tr>
+        <td>Auteur</td>
+        <td>Text</td>
+        <td>Sentiment</td>
+    </tr>
+    {% for key in l_tweet %}
+    <tr>
+        <td>{{key.author}}</td>
+        <td>{{key.text}} </td>
+        <td>{{key.sentiment}} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
